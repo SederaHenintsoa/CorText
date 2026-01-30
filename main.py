@@ -21,13 +21,9 @@ async def correct_text(data: dict):
     
     errors = []
     for m in matches:
-        # AMÉLIORATION PRÉCISION : 
-        # On filtre les suggestions absurdes comme "choque-la" 
-        # en ignorant les suggestions qui ajoutent des tirets ou des espaces
-        # sauf si le mot original en contenait déjà.
         filtered = [r for r in m.replacements if " " not in r and "-" not in r]
         if not filtered:
-            filtered = m.replacements[:1] # Garder la meilleure si on n'a rien d'autre
+            filtered = m.replacements[:1] 
 
         errors.append({
             "message": m.message,
